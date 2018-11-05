@@ -41,11 +41,15 @@ namespace Treehouse.FitnessFrog.Controllers
 
         public ActionResult Add()
         {
-            return View();
+            var entry = new Entry()
+            {
+                Date = DateTime.Today
+            };
+            return View(entry);
         }
 
         [HttpPost]
-        public ActionResult Add(DateTime? date, int? activityId, double? duration, Entry.IntensityLevel? intensity, bool? exclude, string notes)
+        public ActionResult Add(Entry entry)
         {
             //Below is not needed because Html helper methods were used in the Add Razor page
             //ViewBag.date = ModelState["Date"].Value.AttemptedValue;
@@ -54,7 +58,14 @@ namespace Treehouse.FitnessFrog.Controllers
             //ViewBag.intensity = ModelState["Intensity"].Value.AttemptedValue;
             //ViewBag.exclude = ModelState["Exclude"].Value.AttemptedValue;
             //ViewBag.notes= ModelState["Notes"].Value.AttemptedValue;
-            return View();
+
+            //Check if model is valid (no errors)
+            if (ModelState.IsValid)
+            {
+                _entriesRepository.AddEntry(entry);
+                //TODO Display the Entries list page
+            }
+            return View(entry);
         }
 
         public ActionResult Edit(int? id)
