@@ -60,29 +60,21 @@ namespace Treehouse.FitnessFrog.Controllers
             //ViewBag.exclude = ModelState["Exclude"].Value.AttemptedValue;
             //ViewBag.notes= ModelState["Notes"].Value.AttemptedValue;
 
+            //If there aren't any "Duration" field validation errors
+            //then make sure that the duration is greater than 0
+            if(ModelState.IsValidField("Duration") && entry.Duration <= 0)
+            {
+                ModelState.AddModelError("Duration", "The Duration field value must be greater than '0'.");
+            }
+
             //Check if model is valid (no errors)
             if (ModelState.IsValid)
             {
                 _entriesRepository.AddEntry(entry);
-                List<Entry> entries = _entriesRepository.GetEntries();
 
-                // Calculate the total activity.
-                double totalActivity = entries
-                    .Where(e => e.Exclude == false)
-                    .Sum(e => e.Duration);
-
-                // Determine the number of days that have entries.
-                int numberOfActiveDays = entries
-                    .Select(e => e.Date)
-                    .Distinct()
-                    .Count();
-
-                ViewBag.TotalActivity = totalActivity;
-                ViewBag.AverageDailyActivity = (totalActivity / (double)numberOfActiveDays);
-                ViewBag.ActivitiesSelectListItems = new SelectList(Data.Data.Activities, "Id", "Name");
-                //TODO Display the Entries list page
                 return RedirectToAction("Index");
             }
+            ViewBag.ActivitiesSelectListItems = new SelectList(Data.Data.Activities, "Id", "Name");
             return View(entry);
         }
 
