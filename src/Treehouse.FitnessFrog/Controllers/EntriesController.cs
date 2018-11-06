@@ -45,6 +45,7 @@ namespace Treehouse.FitnessFrog.Controllers
             {
                 Date = DateTime.Today
             };
+            ViewBag.ActivitiesSelectListItems = new SelectList(Data.Data.Activities, "Id", "Name");
             return View(entry);
         }
 
@@ -78,12 +79,10 @@ namespace Treehouse.FitnessFrog.Controllers
 
                 ViewBag.TotalActivity = totalActivity;
                 ViewBag.AverageDailyActivity = (totalActivity / (double)numberOfActiveDays);
+                ViewBag.ActivitiesSelectListItems = new SelectList(Data.Data.Activities, "Id", "Name");
                 //TODO Display the Entries list page
-                return View("Index", entries);
+                return RedirectToAction("Index");
             }
-
-
-
             return View(entry);
         }
 

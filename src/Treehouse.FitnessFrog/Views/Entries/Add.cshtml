@@ -3,13 +3,22 @@
 @{
     ViewBag.Title = "Add Entry";
 
-    var selectedListItems = new[]
-    {
-        new SelectListItem(){ Value = "1", Text = "Item 1", Selected = false },
-        new SelectListItem(){ Value = "1", Text = "Item 2", Selected = false }
-    };
-}
+    <!-- selected list items manually generated -->
+    //var selectListItems = new[]
+    //{
+    //    new SelectListItem(){ Value = "1", Text = "Item 1", Selected = false },
+    //    new SelectListItem(){ Value = "2", Text = "Item 2", Selected = false }
+    //};
 
+     <!-- selected list items manually generated -->
+    //var items = new[]
+    //{
+    //    new { Id = 1, Name = "Item 1" },
+    //    new { Id = 1, Name = "Item 1" }
+    //};
+    //var selectListItems = new SelectList(items, "Id", "Name");
+}
+<!-- Manually created select list used without HTML helpers -->
 @*<select>
     <option value="1">Item 1</option>
     <option value="2" selected>Item 2</option>
@@ -39,7 +48,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(m => m.ActivityId, new { @class = "control-label" })
-                @Html.DropDownListFor(m => m.ActivityId, selectedListItems, new {  @class = "form-control"})
+                @Html.DropDownListFor(m => m.ActivityId, (SelectList) ViewBag.ActivitiesSelectListItems, "", new {  @class = "form-control"})
                 @*@Html.TextBoxFor(m => m.ActivityId, new { @class = "form-control" })*@
 
                 @*@Html.Label("ActivityId", new { @class = "control-label" })
