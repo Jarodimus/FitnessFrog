@@ -98,7 +98,7 @@ namespace Treehouse.FitnessFrog.Controllers
             //TODO pass entry to view
 
             SetupActivitiesSelectListItems();
-            return View();
+            return View(entry);
         }
 
         [HttpPost]
