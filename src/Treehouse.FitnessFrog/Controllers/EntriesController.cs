@@ -52,6 +52,9 @@ namespace Treehouse.FitnessFrog.Controllers
         [HttpPost]
         public ActionResult Add(Entry entry)
         {
+            //Global error message denoted by blank string
+            //ModelState.AddModelError("", "This is a global message.");
+
             //Below is not needed because Html helper methods were used in the Add Razor page
             //ViewBag.date = ModelState["Date"].Value.AttemptedValue;
             //ViewBag.activityID = ModelState["ActivityId"].Value.AttemptedValue;
